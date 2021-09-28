@@ -38,8 +38,13 @@
   }
 }
 
+/* Interface styles: links, buttons, inputs */
+
 a.link {
+  position: relative;
+  z-index: 1;
   text-decoration: none;
+  color: #242730;
 }
 
 /* Grid system */

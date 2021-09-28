@@ -1,16 +1,48 @@
 .nav__link {
-  margin-right: 1rem;
+  margin-right: 2rem;
   font-size: 1.2rem;
   font-weight: 600;
   color: #242730;
 }
+
+.nav__link {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: #242730;
+  transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.nav__link::after {
+  content: "";
+  background: #005B85;
+  width: calc(100% + 20px);
+  height: 0;
+  z-index: -1;
+  position: absolute;
+  bottom: -4px;
+  left: -10px;
+  transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.nav__link:hover,
+.nav__link:active {
+  color: #F4F6FA;
+}
+
+.nav__link:hover::after,
+.nav__link:active::after {
+  height: calc(100% + 8px)
+}
+
 
 .nav__search>.button {
   background-color: #005B85;
   color: #F4F6FA;
 }
 
-.nav__search>.button:hover {
+.nav__search>.button:hover,
+.nav__search>.button:active {
   background-color: #4694B8;
   color: #F4F6FA;
 
