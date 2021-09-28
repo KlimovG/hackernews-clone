@@ -1,0 +1,17 @@
+.nav__link {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #242730;
+}
+
+.nav__search>.button {
+  background-color: #005B85;
+  color: #F4F6FA;
+}
+
+.nav__search>.button:hover {
+  background-color: #4694B8;
+  color: #F4F6FA;
+
+}
