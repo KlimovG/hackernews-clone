@@ -10,7 +10,6 @@ function TestOutput() {
         setIsLoading(true);
         fetch("http://hn.algolia.com/api/v1/search?query=Linux&tags=story")
             .then((response) => {
-                //  console.log(response);
                 if (!response.ok)
                     // Failed HTTP status
                     throw new Error(
@@ -28,7 +27,6 @@ function TestOutput() {
             .then((data) => {
                 setHackerContent(data);
                 setIsLoading(false);
-                //console.log(hackerContent);
             })
             .catch((error) => {
                 console.log("Catch block");
@@ -38,14 +36,16 @@ function TestOutput() {
             });
     }, []);
 
-
-
+    if (isError) {
+        return (0); //  present Error to user - TODO
+    }
+            
     return (
         <div>
-            {/* <div style={{ padding: "100px" }}> My TestOutput</div> */}
             {
-                hackerContent &&
-                hackerContent.hits.map((content) => {
+                /* if (isLoading) .. present loading-status  // TODO */
+                
+                hackerContent && hackerContent.hits.map((content) => {
                     return (
                         <Fragment key={content.objectID}>
                             <p>Object-ID: {content.objectID}</p>
@@ -53,11 +53,10 @@ function TestOutput() {
                             <p>Date: {content.created_at}</p>
                             <p>Author: {content.author}</p>
                             <p>Link: {content.url}</p>
-
                         </Fragment>
                     )
                 })
-            }
+            } 
         </div>
     )
 }
