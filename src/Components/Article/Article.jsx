@@ -15,7 +15,6 @@ const Article = (props) => {
         <a href={props.link} className="article__link">{props.link}</a>
       </div>
       <div className="row article__row-2">
-        <span className="article__info">{props.points} by {props.author} {timeDifference} </span>
         <span className="article__comments">{props.num_comments}</span>
       </div>
     </li>

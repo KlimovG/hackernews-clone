@@ -63,14 +63,14 @@ function App() {
 
               hackerContent && hackerContent.hits.map((content) => {
                 return (
-                  <Article key={content.objectID} >
+                  <Article title={content.title} link={content.url} author={content.author} points={content.points} num_comments={content.num_comments}>
                     
                     
-                    <p>Object-ID: {content.objectID}</p>
+                    {/* <p>Object-ID: {content.objectID}</p>
                     <p>Title: {content.title}</p>
                     <p>Date: {content.created_at}</p>
                     <p>Author: {content.author}</p>
-                    <p>Link: {content.url}</p>
+                    <p>Link: {content.url}</p> */}
                   </Article>
                 )
               })
