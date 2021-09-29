@@ -47,13 +47,13 @@ function TestOutput() {
                 
                 hackerContent && hackerContent.hits.map((content) => {
                     return (
-                        <Fragment key={content.objectID}>
+                        {/* <Fragment key={content.objectID}>
                             <p>Object-ID: {content.objectID}</p>
                             <p>Title: {content.title}</p>
                             <p>Date: {content.created_at}</p>
                             <p>Author: {content.author}</p>
                             <p>Link: {content.url}</p>
-                        </Fragment>
+                        </Fragment> */}
                     )
                 })
             } 

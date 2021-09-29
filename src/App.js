@@ -11,6 +11,9 @@ import Article from './Components/Article/Article'
 
 function App() {
   const [searchValue, setSearchValue] = useState("")
+  const [hackerContent, setHackerContent] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const getSearchValue = (e) => {
     setSearchValue(prev => prev = e.target.value)
@@ -19,27 +22,29 @@ function App() {
     value = searchValue;
     console.log(value)
     fetch(`http://hn.algolia.com/api/v1/search?query=${value}`)
-      .then(
-        (response) => {
-          // console.log(response);
-          if (!response.ok)
-            // Failed HTTP status
-            throw new Error(
-              `An error has occured during the request. HTTP status code: ${response.status}`
-            );
-          return response.json();
-        },
+      .then((response) => {
+        if (!response.ok)
+          // Failed HTTP status
+          throw new Error(
+            `An error has occured during the request. HTTP status code: ${response.status}`
+          );
+        return response.json();
+      },
         (error) => {
           console.log("Rejection error callback");
+          setIsLoading(false);
+          setIsError(true);
           console.log(error);
         }
       )
       .then((data) => {
-        console.log(data);
-        setSearchValue(prev => prev = "")
+        setHackerContent(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log("Catch block");
+        setIsLoading(false);
+        setIsError(true);
         console.log(error);
       });
 
@@ -47,15 +52,29 @@ function App() {
   return (
     <>
 
-    <Header />
-    <TestOutput />
+      <Header />
 
       <Header isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
           <ol className="article-list">
-            <Article />
-            <Article />
+            {
+              /* if (isLoading) .. present loading-status  // TODO */
+
+              hackerContent && hackerContent.hits.map((content) => {
+                return (
+                  <Article key={content.objectID} >
+                    
+                    
+                    <p>Object-ID: {content.objectID}</p>
+                    <p>Title: {content.title}</p>
+                    <p>Date: {content.created_at}</p>
+                    <p>Author: {content.author}</p>
+                    <p>Link: {content.url}</p>
+                  </Article>
+                )
+              })
+            }
 
           </ol>
         </div>
