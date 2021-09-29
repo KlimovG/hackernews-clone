@@ -2,7 +2,7 @@ import React from 'react';
 import './header.css';
 import Nav from '../nav/nav'
 
-export const Header = () => {
+export const Header = (props) => {
   return (
     <header>
       <div className="container">
@@ -11,7 +11,7 @@ export const Header = () => {
             <img src="./img/hn-logo.svg" alt="Logo" />
             Hacker News
           </a>
-          <Nav />
+          <Nav isValue={props.isValue} onSearch={props.onSearch} value={props.value} />
         </div>
       </div>
     </header>
