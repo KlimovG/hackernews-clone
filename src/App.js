@@ -3,7 +3,11 @@ import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 import Header from './Components/header/header'
+
+import TestOutput from './TestOutput';
+
 import Article from './Components/Article/Article'
+
 
 function App() {
   const [searchValue, setSearchValue] = useState("")
@@ -42,6 +46,10 @@ function App() {
   }
   return (
     <>
+
+    <Header />
+    <TestOutput />
+
       <Header isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
@@ -52,6 +60,7 @@ function App() {
           </ol>
         </div>
       </main>
+
     </>
   );
 }
