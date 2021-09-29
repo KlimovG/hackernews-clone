@@ -69,9 +69,19 @@ function App() {
           }
           <ol className="article-list">
             {
-              hackerContent && hackerContent.hits.map((content) => {
+
+              /* if (isLoading) .. present loading-status  // TODO */
+
+              hackerContent && hackerContent.hits.map((content, i) => {
                 return (
-                  <Article title={content.title} link={content.url} author={content.author} points={content.points} num_comments={content.num_comments}>
+                  <Article
+                    key={i + 1}
+                    title={content.title}
+                    link={content.url}
+                    author={content.author}
+                    points={content.points}
+                    num_comments={content.num_comments}
+                    time={content.created_at}>
                   </Article>
                 )
               })
