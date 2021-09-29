@@ -3,16 +3,17 @@ import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 import Header from './Components/header/header'
+import Spinner from './Components/Spinner'
 
-import TestOutput from './TestOutput';
-
+// import TestOutput from './TestOutput';
+import MoonLoader from "react-spinners/MoonLoader";
 import Article from './Components/Article/Article'
 
 
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [hackerContent, setHackerContent] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const getSearchValue = (e) => {
@@ -20,6 +21,7 @@ function App() {
   }
   const onSearch = (value) => {
     value = searchValue;
+    setIsLoading(true);
     console.log(value)
     fetch(`http://hn.algolia.com/api/v1/search?query=${value}`)
       .then((response) => {
@@ -49,6 +51,11 @@ function App() {
       });
 
   }
+
+  // if (isLoading) {
+  //   return <MoonLoader color="black" loading={isLoading} size={50} />;
+  // }
+
   return (
     <>
 
@@ -57,8 +64,12 @@ function App() {
       <Header isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
+          {
+            isLoading && <Spinner />
+          }
           <ol className="article-list">
             {
+
               /* if (isLoading) .. present loading-status  // TODO */
 
               hackerContent && hackerContent.hits.map((content, i) => {
