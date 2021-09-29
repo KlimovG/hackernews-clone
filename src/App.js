@@ -61,16 +61,16 @@ function App() {
             {
               /* if (isLoading) .. present loading-status  // TODO */
 
-              hackerContent && hackerContent.hits.map((content) => {
+              hackerContent && hackerContent.hits.map((content, i) => {
                 return (
-                  <Article title={content.title} link={content.url} author={content.author} points={content.points} num_comments={content.num_comments}>
-                    
-                    
-                    {/* <p>Object-ID: {content.objectID}</p>
-                    <p>Title: {content.title}</p>
-                    <p>Date: {content.created_at}</p>
-                    <p>Author: {content.author}</p>
-                    <p>Link: {content.url}</p> */}
+                  <Article
+                    key={i + 1}
+                    title={content.title}
+                    link={content.url}
+                    author={content.author}
+                    points={content.points}
+                    num_comments={content.num_comments}
+                    time={content.created_at}>
                   </Article>
                 )
               })
