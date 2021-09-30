@@ -4,9 +4,9 @@ import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 import Header from './Components/header/header'
 import Spinner from './Components/Spinner'
-
+import { Loader } from 'semantic-ui-react'
 // import TestOutput from './TestOutput';
-import MoonLoader from "react-spinners/MoonLoader";
+
 import Article from './Components/Article/Article'
 
 
