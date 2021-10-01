@@ -17,7 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [activePage, setActivePage] = useState(1);
-  const [articlesPerPage, setPostsPerPage] = useState(5);
+  const [articlesPerPage, setArticlesPerPage] = useState(5);
   const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
 
 
@@ -29,7 +29,7 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    fetch(`http://hn.algolia.com/api/v1/search?query=${value}`)
+    fetch(`http://hn.algolia.com/api/v1/search?query=${value}&hitsPerPage=50`)
       .then((response) => {
         if (!response.ok)
           // Failed HTTP status
