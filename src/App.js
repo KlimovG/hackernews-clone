@@ -19,7 +19,7 @@ function App() {
   const [activePage, setActivePage] = useState(1);
   const [articlesPerPage, setArticlesPerPage] = useState(5);
   const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
-  const [numOfResults, setNumOfResults] = useState({ value: 10 })
+  const [numOfResults, setNumOfResults] = useState({ value: 20 })
 
   const onChangeRange = (e) => {
     setArticlesPerPage(e.target.value)
@@ -28,7 +28,7 @@ function App() {
   const onChangeSelect = (_, { value }) => {
     console.log({ value })
     setNumOfResults({ value })
-    // onSearch()
+    onSearch()
   }
   const getSearchValue = (e) => {
     setSearchValue(prev => prev = e.target.value)
