@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -20,15 +20,19 @@ function App() {
   const [articlesPerPage, setArticlesPerPage] = useState(5);
   const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
   const [numOfResults, setNumOfResults] = useState({ value: 20 })
+  const [totalOfPagination, setTotalOfPagination] = useState(Math.ceil(numOfResults.value / articlesPerPage))
+
+  useEffect(() => {
+    setTotalOfPagination(Math.ceil(numOfResults.value / articlesPerPage))
+  }, [numOfResults, articlesPerPage])
+
 
   const onChangeRange = (e) => {
     setArticlesPerPage(e.target.value)
-    // onSearch()
   }
   const onChangeSelect = (_, { value }) => {
     console.log({ value })
     setNumOfResults({ value })
-    onSearch()
   }
   const getSearchValue = (e) => {
     setSearchValue(prev => prev = e.target.value)
@@ -101,9 +105,6 @@ function App() {
 
   return (
     <>
-
-      <Header />
-
       <Header onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
@@ -136,7 +137,7 @@ function App() {
             }
 
           </ol>
-          <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalPages} />
+          <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />
 
           {/* {isLoading && } */}
         </div>
