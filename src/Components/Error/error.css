@@ -1,0 +1,24 @@
+.error {
+  position: relative;
+  min-width: 800px;
+  min-height: 500px;
+  padding: 1rem;
+}
+
+.error__title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background-color: #FF9D00;
+
+}
+
+.error__gif {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: auto;
+}
