@@ -11,11 +11,11 @@ const Nav = (props) => {
 
   // }
   const hitsPerPage = [
-    { key: '1', text: '20', value: '20' },
-    { key: '2', text: '40', value: '40' },
-    { key: '3', text: '60', value: '60' },
-    { key: '4', text: '80', value: '80' },
-    { key: '5', text: '100', value: '100' }
+    { key: '1', text: '40', value: '40' },
+    { key: '2', text: '60', value: '60' },
+    { key: '3', text: '100', value: '100' },
+    { key: '4', text: '150', value: '150' },
+    { key: '5', text: '200', value: '200' }
   ]
   return (
     <nav className="nav">
