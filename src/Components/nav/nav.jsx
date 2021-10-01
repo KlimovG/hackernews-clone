@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './nav.css'
-import { Form } from 'semantic-ui-react'
+import { Form, Loader, Button } from 'semantic-ui-react'
 
 const Nav = (props) => {
   // const [searchValue, setSearchValue] = useState("")
@@ -12,8 +12,8 @@ const Nav = (props) => {
   // }
   return (
     <nav className="nav">
-      <a className="nav__link link" href="#">new</a>
-      <a className="nav__link link" href="#">comments</a>
+      {/* <a className="nav__link link" href="#">new</a>
+      <a className="nav__link link" href="#">comments</a> */}
       <Form className="nav__form" onSubmit={() => props.onSearch()}>
         <Form.Group className="nav__group">
           <Form.Input
@@ -23,7 +23,7 @@ const Nav = (props) => {
             onChange={(e) => props.isValue(e)}
             value={props.value}
           />
-          <Form.Button content='Submit' className="nav__btn" />
+          {props.isLoading ? <Button type="submit" className="nav__btn" ><Loader inline='centered' active size='mini'></Loader></Button> : <Button type="submit" className="nav__btn" >Search</Button>}
         </Form.Group>
       </Form>
     </nav>

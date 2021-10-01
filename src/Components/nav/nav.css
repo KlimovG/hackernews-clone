@@ -44,15 +44,16 @@
 }
 
 
-.nav .nav__form .nav__group .nav__btn .button {
+.nav .nav__form .nav__group .nav__btn {
+  height: 100%;
   background-color: #005B85;
   color: #F4F6FA;
   border-radius: 0 .28571429rem .28571429rem 0;
 }
 
-.nav .nav__form .nav__group .nav__btn .button:hover,
-.nav .nav__form .nav__group .nav__btn .button:active,
-.nav .nav__form .nav__group .nav__btn .button:focus {
+.nav .nav__form .nav__group .nav__btn:hover,
+.nav .nav__form .nav__group .nav__btn:active,
+.nav .nav__form .nav__group .nav__btn:focus {
   background-color: #4694B8;
   color: #F4F6FA;
 
@@ -74,9 +75,14 @@
 }
 
 .nav .nav__form .nav__group .nav__btn {
-  padding-left: 0;
+  min-width: 97px;
+  border-radius: 0 .28571429rem .28571429rem 0;
 }
 
 .nav .nav__form .nav__group .nav__search [name="search"] {
   border-radius: .28571429rem 0 0 .28571429rem;
+}
+
+.nav .ui.loader:before {
+  border: .2em solid rgba(255, 255, 255, 1);
 }

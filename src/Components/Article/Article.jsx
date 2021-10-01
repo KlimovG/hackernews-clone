@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './article.css'
+import { Loader, Dimmer } from 'semantic-ui-react'
+
 
 const Article = (props) => {
   const [createTime, setCreateTime] = useState("")
@@ -9,8 +11,6 @@ const Article = (props) => {
     const timeCreation = new Date(time).getTime()
     const timeCurrent = new Date().getTime()
     const timeDifference = (timeCurrent - timeCreation) / 1000
-    console.log(timeCreation)
-    console.log(timeCurrent)
     const days = Math.floor(timeDifference / 86400);
     const years = Math.floor(days / 365.25)
 
@@ -41,6 +41,7 @@ const Article = (props) => {
 
   return (
     <li className="article">
+      <span className="article__id">{props.id}.</span>
       <div className="row article__row-1">
         <h3 className="article__title">{props.title}</h3>
         <a href={props.link} className="article__link">link</a>

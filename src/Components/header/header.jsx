@@ -11,7 +11,7 @@ export const Header = (props) => {
             <img src="./img/hn-logo.svg" alt="Logo" />
             Hacker News
           </a>
-          <Nav isValue={props.isValue} onSearch={props.onSearch} value={props.value} />
+          <Nav isLoading={props.isLoading} isValue={props.isValue} onSearch={props.onSearch} value={props.value} />
         </div>
       </div>
     </header>

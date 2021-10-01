@@ -3,9 +3,9 @@ import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 import Header from './Components/header/header'
-import Spinner from './Components/Spinner'
-import { Loader } from 'semantic-ui-react'
-// import TestOutput from './TestOutput';
+import Spinner from './Components/Spinner/Spinner'
+import { Loader, Dimmer, Pagination } from 'semantic-ui-react'
+import Error from './Components/Error/Error';
 
 import Article from './Components/Article/Article'
 
@@ -13,8 +13,13 @@ import Article from './Components/Article/Article'
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [hackerContent, setHackerContent] = useState();
+  const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [activePage, setActivePage] = useState(1);
+  const [articlesPerPage, setPostsPerPage] = useState(5);
+  const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
+
 
   const getSearchValue = (e) => {
     setSearchValue(prev => prev = e.target.value)
@@ -22,7 +27,8 @@ function App() {
   const onSearch = (value) => {
     value = searchValue;
     setIsLoading(true);
-    console.log(value)
+    setIsError(false)
+    setArticles(prev => prev = [])
     fetch(`http://hn.algolia.com/api/v1/search?query=${value}`)
       .then((response) => {
         if (!response.ok)
@@ -40,8 +46,16 @@ function App() {
         }
       )
       .then((data) => {
-        setHackerContent(data);
         setIsLoading(false);
+        if (data.hits.length > 0) {
+          setHackerContent(data);
+          setArticles(data.hits)
+          setIsDisabledPagination("")
+          setSearchValue("")
+        } else {
+          setIsDisabledPagination("disabled")
+          setIsError(true)
+        }
       })
       .catch((error) => {
         console.log("Catch block");
@@ -50,8 +64,19 @@ function App() {
         console.log(error);
       });
 
+
   }
 
+
+
+  const handlePaginationChange = (_, { activePage }) => {
+    setActivePage(activePage)
+  }
+
+  const indexOfLastArticle = activePage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticle = articles.slice(indexOfFirstArticle, indexOfLastArticle)
+  const totalPages = 20 / articlesPerPage;
   // if (isLoading) {
   //   return <MoonLoader color="black" loading={isLoading} size={50} />;
   // }
@@ -61,22 +86,27 @@ function App() {
 
       <Header />
 
-      <Header isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
+      <Header isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
-          {
-            isLoading && <Spinner />
-          }
+          {/* {
+            isLoading && <Dimmer active={isLoading}>
+              <Loader inline='centered' active size='medium'>Loading</Loader>
+            </Dimmer>
+          } */}
+          {isError && <Error />}
           <ol className="article-list">
             {
 
               /* if (isLoading) .. present loading-status  // TODO */
 
-              hackerContent && hackerContent.hits.map((content, i) => {
+              currentArticle && currentArticle.map((content, i) => {
                 return (
                   <Article
+                    isLoading={isLoading}
                     key={i + 1}
-                    title={content.title}
+                    id={(activePage - 1) * articlesPerPage + i + 1}
+                    title={content.title || content.story_title}
                     link={content.url}
                     author={content.author}
                     points={content.points}
@@ -88,6 +118,9 @@ function App() {
             }
 
           </ol>
+          <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalPages} />
+
+          {/* {isLoading && } */}
         </div>
       </main>
 

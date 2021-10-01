@@ -28,3 +28,39 @@ a.link {
 main {
   padding-top: 100px;
 }
+
+main .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main .container .pagination.menu {
+  /* background-color: #FAC07C; */
+  border: none;
+}
+
+main .container .pagination.menu.disabled {
+  display: none;
+}
+
+main .container .pagination.menu .item {
+  color: #242730;
+}
+
+main .container .pagination.menu .active.item {
+  background-color: #FF9D00;
+  color: #F4F6FA;
+}
+
+main .container .pagination.menu .item:hover {
+  background-color: #FF9D00;
+  color: #F4F6FA;
+
+}
+
+/* Article list */
+.article-list {
+  list-style: none;
+  width: 100%;
+}
