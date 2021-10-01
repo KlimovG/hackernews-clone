@@ -3,6 +3,7 @@ header {
   position: fixed;
   padding: 0.8rem 0;
   background-color: #FF9D00;
+  z-index: 2;
 }
 
 .header__logo {

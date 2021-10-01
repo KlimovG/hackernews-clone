@@ -19,8 +19,17 @@ function App() {
   const [activePage, setActivePage] = useState(1);
   const [articlesPerPage, setArticlesPerPage] = useState(5);
   const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
+  const [numOfResults, setNumOfResults] = useState({ value: 10 })
 
-
+  const onChangeRange = (e) => {
+    setArticlesPerPage(e.target.value)
+    // onSearch()
+  }
+  const onChangeSelect = (_, { value }) => {
+    console.log({ value })
+    setNumOfResults({ value })
+    // onSearch()
+  }
   const getSearchValue = (e) => {
     setSearchValue(prev => prev = e.target.value)
   }
@@ -29,7 +38,9 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    fetch(`http://hn.algolia.com/api/v1/search?query=${value}&hitsPerPage=50`)
+    const url = `http://hn.algolia.com/api/v1/search?query=${value}&hitsPerPage=${numOfResults.value}`
+    console.log(url)
+    fetch(url)
       .then((response) => {
         if (!response.ok)
           // Failed HTTP status
@@ -51,7 +62,6 @@ function App() {
           setHackerContent(data);
           setArticles(data.hits)
           setIsDisabledPagination("")
-          setSearchValue("")
         } else {
           setIsDisabledPagination("disabled")
           setIsError(true)
@@ -76,7 +86,7 @@ function App() {
   const indexOfLastArticle = activePage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticle = articles.slice(indexOfFirstArticle, indexOfLastArticle)
-  const totalPages = 20 / articlesPerPage;
+  const totalPages = 20;
   // if (isLoading) {
   //   return <MoonLoader color="black" loading={isLoading} size={50} />;
   // }
@@ -86,7 +96,7 @@ function App() {
 
       <Header />
 
-      <Header isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
+      <Header onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
           {/* {

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* Interface styles: links, buttons, inputs */
 html {
   font-size: 16px;
