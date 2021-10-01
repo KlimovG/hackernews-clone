@@ -38,8 +38,16 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    const url = `http://hn.algolia.com/api/v1/search?query=${value}&hitsPerPage=${numOfResults.value}`
-    console.log(url)
+    const url = new URL ("http://hn.algolia.com/api/v1/search");
+
+    const parameters = {
+      query: value,
+      hitsPerPage: numOfResults.value
+    };
+    url.search = new URLSearchParams(parameters);
+
+    console.log(`URL: ${url}`);
+    
     fetch(url)
       .then((response) => {
         if (!response.ok)
