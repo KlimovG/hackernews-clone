@@ -33,9 +33,10 @@ const Nav = (props) => {
           <Select className="nav__select" onChange={props.onChangeSelect} placeholder='Number of results' options={hitsPerPage} />
           {props.isLoading ? <Button type="submit" className="nav__btn" ><Loader inline='centered' active size='mini'></Loader></Button> : <Button type="submit" className="nav__btn" >Search</Button>}
           <Form.Input
+            className="nav__range"
             label={`Articles per page: ${props.range}`}
             min={1}
-            max={30}
+            max={20}
             name='range'
             onChange={(e) => props.onChangeRange(e)}
             step={1}

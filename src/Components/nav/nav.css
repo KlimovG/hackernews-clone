@@ -65,7 +65,7 @@
 }
 
 .nav .nav__form .nav__group {
-  height: 45px;
+  height: 50px;
   margin: 0;
   display: flex;
   align-items: stretch;
@@ -99,4 +99,26 @@
   max-height: 100%;
   height: 100%;
   border-radius: 0;
+  line-height: 25px;
+}
+
+.nav .nav__form .nav__select>.icon.dropdown {
+  top: 50%;
+  margin-top: 0;
+  transform: translateY(-50%);
+}
+
+.nav .nav__form .nav__range {
+  width: 200px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: .28571429rem;
+}
+
+.nav .nav__form .nav__range label {
+  text-align: center;
+}
+
+.nav .nav__form .nav__range input[type="range"] {
+  padding: 0 0.1em;
 }
