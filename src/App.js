@@ -42,7 +42,7 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    const url = new URL ("http://hn.algolia.com/api/v1/search");
+    const url = new URL("https://hn.algolia.com/api/v1/search");
 
     const parameters = {
       query: value,
@@ -51,7 +51,7 @@ function App() {
     url.search = new URLSearchParams(parameters);
 
     console.log(`URL: ${url}`);
-    
+
     fetch(url)
       .then((response) => {
         if (!response.ok)
