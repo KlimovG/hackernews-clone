@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hackernews-clone/build/static/css/main.ea649f56.chunk.css",
-    "main.js": "/hackernews-clone/build/static/js/main.d07e7f6c.chunk.js",
-    "main.js.map": "/hackernews-clone/build/static/js/main.d07e7f6c.chunk.js.map",
+    "main.js": "/hackernews-clone/build/static/js/main.1250274b.chunk.js",
+    "main.js.map": "/hackernews-clone/build/static/js/main.1250274b.chunk.js.map",
     "runtime-main.js": "/hackernews-clone/build/static/js/runtime-main.a7cb7c6a.js",
     "runtime-main.js.map": "/hackernews-clone/build/static/js/runtime-main.a7cb7c6a.js.map",
     "static/css/2.21f7ed22.chunk.css": "/hackernews-clone/build/static/css/2.21f7ed22.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.21f7ed22.chunk.css",
     "static/js/2.ca34daf0.chunk.js",
     "static/css/main.ea649f56.chunk.css",
-    "static/js/main.d07e7f6c.chunk.js"
+    "static/js/main.1250274b.chunk.js"
   ]
 }
