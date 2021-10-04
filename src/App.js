@@ -14,6 +14,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
   const [hackerContent, setHackerContent] = useState();
   const [articles, setArticles] = useState([]);
+  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [activePage, setActivePage] = useState(1);
@@ -35,14 +36,14 @@ function App() {
   }
   useEffect(() => {
     luckyQuery()
-    console.log('hired')
+    // console.log('hired')
   }, [])
 
   const onChangeRange = (e) => {
     setArticlesPerPage(e.target.value)
   }
   const onChangeSelect = (_, { value }) => {
-    console.log({ value })
+    // console.log({ value })
     setNumOfResults({ value })
   }
   const getSearchValue = (e) => {
@@ -55,7 +56,7 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    const url = new URL("https://hn.algolia.com/api/v1/search_by_date?");
+    const url = new URL("https://hn.algolia.com/api/v1/search?");
 
     const parameters = {
       query: value,
@@ -63,7 +64,7 @@ function App() {
     };
     url.search = new URLSearchParams(parameters);
 
-    console.log(`URL: ${url}`);
+    // console.log(`URL: ${url}`);
 
     fetch(url)
       .then((response) => {
@@ -116,6 +117,41 @@ function App() {
   //   return <MoonLoader color="black" loading={isLoading} size={50} />;
   // }
 
+
+  const getComments = (id) => {
+    const url = `http://hn.algolia.com/api/v1/items/${id}`;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok)
+          // Failed HTTP status
+          throw new Error(
+            `An error has occured during the request. HTTP status code: ${response.status}`
+          );
+        return response.json();
+      },
+        (error) => {
+          console.log("Rejection error callback");
+          setIsLoading(false);
+          setIsError(true);
+          console.log(error);
+        }
+      )
+      .then((data) => {
+        setIsLoading(false);
+        if (data) {
+          setComments(data);
+        } else {
+          console.log('No comments detected')
+        }
+      })
+      .catch((error) => {
+        console.log("Catch block");
+        setIsLoading(false);
+        setIsError(true);
+        console.log(error);
+      });
+  }
   return (
     <>
       <Header luckyQuery={luckyQuery} onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
@@ -136,14 +172,16 @@ function App() {
                 return (
                   <Article
                     isLoading={isLoading}
-                    key={i + 1}
+                    key={content.objectID}
                     id={(activePage - 1) * articlesPerPage + i + 1}
                     title={content.title || content.story_title}
                     link={content.url}
                     author={content.author}
                     points={content.points}
                     num_comments={content.num_comments}
-                    time={content.created_at}>
+                    time={content.created_at}
+                    getComments={getComments}
+                  >
                   </Article>
                 )
               })

@@ -35,7 +35,7 @@ const Article = (props) => {
   }
 
   useEffect(() => {
-    setCreateTime(prev => prev = timeCalculation(`${props.time}`))
+    setCreateTime(prev => prev = timeCalculation(props.time))
   }, [])
   // timeCalculation(createTime)
 
@@ -48,7 +48,7 @@ const Article = (props) => {
       </div>
       <div className="row article__row-2">
         <span className="article__info">{props.points} points by {props.author} {createTime}</span>
-        <a href={props.comments} className="article__comments">{props.num_comments} comments</a>
+        <button onClick={() => props.getComments(props.id)} className="article__comments">{props.num_comments} comments</button>
       </div>
     </li>
   )
