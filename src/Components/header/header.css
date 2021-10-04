@@ -10,7 +10,7 @@ header {
   display: flex;
   align-items: center;
   font-weight: 700;
-  margin-right: 5rem;
+  margin-right: auto;
   font-size: 1.2rem;
   color: #005B85;
 }

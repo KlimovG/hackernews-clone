@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 import Header from './Components/header/header'
 import Spinner from './Components/Spinner/Spinner'
-import { Loader, Dimmer, Pagination } from 'semantic-ui-react'
+import { Loader, Dimmer, Pagination, Button } from 'semantic-ui-react'
 import Error from './Components/Error/Error';
 
 import Article from './Components/Article/Article'
@@ -27,6 +27,14 @@ function App() {
   }, [numOfResults, articlesPerPage])
 
 
+  const luckyArray = ['php', 'jest', 'javascript', 'perl', 'react', 'angular', 'hacking', 'python', 'vue', 'jango', 'html and css', 'politics in it', 'frontend', 'backend', 'server', 'macos', 'windows', 'bootcamp']
+
+  const luckyQuery = () => {
+    const luckyNumber = Math.floor(Math.random() * luckyArray.length)
+    const searchLuckyValue = luckyArray[luckyNumber]
+    onSearch(searchLuckyValue)
+  }
+
   const onChangeRange = (e) => {
     setArticlesPerPage(e.target.value)
   }
@@ -38,7 +46,9 @@ function App() {
     setSearchValue(prev => prev = e.target.value)
   }
   const onSearch = (value) => {
-    value = searchValue;
+    if (value === undefined) {
+      value = searchValue;
+    }
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
@@ -105,7 +115,7 @@ function App() {
 
   return (
     <>
-      <Header onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
+      <Header luckyQuery={luckyQuery} onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
       <main>
         <div className="container">
           {/* {

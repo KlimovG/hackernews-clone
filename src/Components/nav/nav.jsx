@@ -45,6 +45,7 @@ const Nav = (props) => {
           />
         </Form.Group>
       </Form>
+      <Button onClick={props.luckyQuery} className="nav__btn">Surprise me!</Button>
     </nav>
   )
 }

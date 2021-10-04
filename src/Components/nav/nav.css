@@ -51,9 +51,19 @@
   border-radius: 0 .28571429rem .28571429rem 0;
 }
 
+header .nav>.ui.button.nav__btn {
+  height: 100%;
+  margin-left: 1rem;
+  background-color: #005B85;
+  color: #F4F6FA;
+}
+
 .nav .nav__form .nav__group .nav__btn:hover,
 .nav .nav__form .nav__group .nav__btn:active,
-.nav .nav__form .nav__group .nav__btn:focus {
+.nav .nav__form .nav__group .nav__btn:focus,
+header .nav .ui.button.nav__btn:hover,
+header .nav .ui.button.nav__btn:active,
+header .nav .ui.button.nav__btn:focus {
   background-color: #4694B8;
   color: #F4F6FA;
 
@@ -98,6 +108,8 @@
   /* border: none; */
   max-height: 100%;
   height: 100%;
+  max-width: 200px;
+  min-width: 180px;
   border-radius: 0;
   line-height: 25px;
 }
