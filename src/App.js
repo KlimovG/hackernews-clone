@@ -147,7 +147,8 @@ function App() {
             }
 
           </ol>
-          <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />
+          {totalOfPagination > 1 && <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />}
+
 
           {/* {isLoading && } */}
         </div>
