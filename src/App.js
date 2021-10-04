@@ -26,7 +26,6 @@ function App() {
     setTotalOfPagination(Math.ceil(numOfResults.value / articlesPerPage))
   }, [numOfResults, articlesPerPage])
 
-
   const luckyArray = ['php', 'jest', 'javascript', 'perl', 'react', 'angular', 'hacking', 'python', 'vue', 'jango', 'html and css', 'politics in it', 'frontend', 'backend', 'server', 'macos', 'windows', 'bootcamp']
 
   const luckyQuery = () => {
@@ -34,6 +33,10 @@ function App() {
     const searchLuckyValue = luckyArray[luckyNumber]
     onSearch(searchLuckyValue)
   }
+  useEffect(() => {
+    luckyQuery()
+    console.log('hired')
+  }, [])
 
   const onChangeRange = (e) => {
     setArticlesPerPage(e.target.value)
@@ -52,7 +55,7 @@ function App() {
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
-    const url = new URL("https://hn.algolia.com/api/v1/search");
+    const url = new URL("https://hn.algolia.com/api/v1/search_by_date?");
 
     const parameters = {
       query: value,

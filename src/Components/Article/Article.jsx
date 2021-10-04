@@ -48,7 +48,7 @@ const Article = (props) => {
       </div>
       <div className="row article__row-2">
         <span className="article__info">{props.points} points by {props.author} {createTime}</span>
-        <span className="article__comments">{props.num_comments} comments</span>
+        <a href={props.comments} className="article__comments">{props.num_comments} comments</a>
       </div>
     </li>
   )

@@ -109,7 +109,7 @@ header .nav .ui.button.nav__btn:focus {
   max-height: 100%;
   height: 100%;
   max-width: 200px;
-  min-width: 180px;
+  min-width: 150px;
   border-radius: 0;
   line-height: 25px;
 }
