@@ -30,7 +30,7 @@ const Nav = (props) => {
             onChange={(e) => props.isValue(e)}
             value={props.value}
           />
-          <Select className="nav__select" onChange={props.onChangeSelect} placeholder='Number of results' options={hitsPerPage} />
+          <Select className="nav__select" onChange={props.onChangeSelect} placeholder='Num of results' options={hitsPerPage} />
           {props.isLoading ? <Button type="submit" className="nav__btn" ><Loader inline='centered' active size='mini'></Loader></Button> : <Button type="submit" className="nav__btn" >Search</Button>}
           <Form.Input
             className="nav__range"
