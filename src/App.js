@@ -26,6 +26,8 @@ function App() {
   const [numOfResults, setNumOfResults] = useState({ value: 20 })
   const [totalOfPagination, setTotalOfPagination] = useState(Math.ceil(numOfResults.value / articlesPerPage))
   const [isComments, setIsComments] = useState(false)
+  const [isCommentsLoading, setIsCommentsLoading] = useState(false)
+  const [articleTitle, setArticleTitle] = useState()
 
   useEffect(() => {
     setTotalOfPagination(Math.ceil(numOfResults.value / articlesPerPage))
@@ -125,7 +127,7 @@ function App() {
 
   const getComments = (id) => {
     const url = `http://hn.algolia.com/api/v1/items/${id}`;
-
+    setIsCommentsLoading(true)
     fetch(url)
       .then((response) => {
         if (!response.ok)
@@ -139,6 +141,7 @@ function App() {
           console.log("Rejection error callback");
           setIsLoading(false);
           setIsError(true);
+          setIsCommentsLoading(false)
           console.log(error);
         }
       )
@@ -147,6 +150,7 @@ function App() {
         if (data) {
           setComments(data.children);
           setIsComments(true)
+          setIsCommentsLoading(false)
           // console.log(comments)
           // createComments(comments)
         } else {
@@ -156,6 +160,7 @@ function App() {
       .catch((error) => {
         console.log("Catch block");
         setIsLoading(false);
+        setIsCommentsLoading(false)
         setIsError(true);
         console.log(error);
       });
@@ -171,9 +176,9 @@ function App() {
   const Comment = ({ text, children, id }) => {
     const hasChildren = children && (children.length > 0)
     return (
-      <li className="comment__item" key={id + 1} >
+      <li className="comment__item">
         <p>
-          <TextOfComment key={id + 2} text={text} />
+          <TextOfComment text={text} />
         </p>
         {hasChildren && children.map((item) => (
           <ul className="comment__list-child">
@@ -183,6 +188,12 @@ function App() {
       </li>
     )
   }
+
+  const getArticleTitle = (value) => {
+    setArticleTitle(value)
+  }
+
+
   return (
     <>
       <Header luckyQuery={luckyQuery} onChangeSelect={onChangeSelect} range={articlesPerPage} onChangeRange={onChangeRange} isLoading={isLoading} isValue={getSearchValue} onSearch={onSearch} value={searchValue} />
@@ -213,6 +224,9 @@ function App() {
                     num_comments={content.num_comments}
                     time={content.created_at}
                     getComments={getComments}
+                    getID={getArticleTitle}
+                    isCommentsLoading={isCommentsLoading}
+                    isComments={isComments}
                   >
                   </Article>
                 )
@@ -222,7 +236,8 @@ function App() {
           </ol>
           {totalOfPagination > 1 && <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />}
           {isComments &&
-            <div id="commentsContainer">
+            <div className="comment" id="commentsContainer">
+              <h2 className="comment__title">Comments for Article: <em>"{articleTitle}"</em></h2>
               <ul className="comment__list-parent">
                 {comments && comments.map(item => <Comment key={item.id}  {...item} />)}
 

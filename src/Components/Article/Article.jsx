@@ -5,6 +5,7 @@ import { Loader, Dimmer } from 'semantic-ui-react'
 
 const Article = (props) => {
   const [createTime, setCreateTime] = useState("")
+
   // calculate days
   const timeCalculation = (time) => {
     // const timeCreation = new Date(`${props.time}`).getTime();
@@ -48,7 +49,11 @@ const Article = (props) => {
       </div>
       <div className="row article__row-2">
         <span className="article__info">{props.points} points by {props.author} {createTime}</span>
-        <button onClick={() => props.getComments(props.itemID)} className="article__comments">{props.num_comments} comments</button>
+        <button onClick={() => {
+          props.getComments(props.itemID);
+          props.getID(props.title)
+        }} className="article__comments">{props.num_comments} comments</button>
+
       </div>
     </li>
   )

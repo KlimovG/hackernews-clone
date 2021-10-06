@@ -80,6 +80,14 @@ main .container .pagination.menu .item:hover {
 }
 
 /* Comments styles */
+.comment {
+  margin-top: 2rem;
+}
+
+.comment__title {
+  text-align: center;
+}
+
 .comment__item {
   padding: 1rem 2rem;
 }
