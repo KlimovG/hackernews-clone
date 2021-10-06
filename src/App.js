@@ -234,7 +234,7 @@ function App() {
             }
 
           </ol>
-          {totalOfPagination > 1 && <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />}
+          {!isError && totalOfPagination > 1 && <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />}
           {isComments &&
             <div className="comment" id="commentsContainer">
               <h2 className="comment__title">Comments for Article: <em>"{articleTitle}"</em></h2>
