@@ -82,6 +82,7 @@ main .container .pagination.menu .item:hover {
 /* Comments styles */
 .comment {
   margin-top: 2rem;
+  max-width: 100%;
 }
 
 .comment__title {
