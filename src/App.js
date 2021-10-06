@@ -126,7 +126,7 @@ function App() {
 
 
   const getComments = (id) => {
-    const url = `http://hn.algolia.com/api/v1/items/${id}`;
+    const url = `https://hn.algolia.com/api/v1/items/${id}`;
     setIsCommentsLoading(true)
     fetch(url)
       .then((response) => {
