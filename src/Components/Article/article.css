@@ -6,7 +6,6 @@
 }
 
 .article:hover {
-  cursor: pointer;
   box-shadow: 0px 4px 16px 8px rgba(250, 192, 124, 0.25);
   transform: scale(1.01);
 }
@@ -47,11 +46,16 @@
 
 .article__row-2 {
   font-size: 0.8rem;
+  align-items: center;
 }
 
 .article__comments {
   position: relative;
+  padding: 0.5rem 1rem;
   margin-left: 1rem;
+  background-color: #005B85;
+  color: #F4F6FA;
+  cursor: pointer;
 }
 
 .article__comments::before {
@@ -62,4 +66,12 @@
   top: 0;
   left: calc(-0.5rem - 0.5px);
   background-color: #767677;
+}
+
+.article__comments:hover,
+.article__comments:active,
+.article__comments:focus {
+  background-color: #4694B8;
+  color: #F4F6FA;
+
 }

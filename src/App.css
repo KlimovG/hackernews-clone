@@ -15,6 +15,16 @@ a.link {
   color: #242730;
 }
 
+button {
+  appearance: none;
+  border: none;
+}
+
+ul {
+  list-style-type: none;
+
+}
+
 /* Grid system */
 .container {
   margin: 0 auto;
@@ -31,6 +41,7 @@ a.link {
 
 main {
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 main .container {
@@ -66,4 +77,19 @@ main .container .pagination.menu .item:hover {
 .article-list {
   list-style: none;
   width: 100%;
+}
+
+/* Comments styles */
+.comment__item {
+  padding: 1rem 2rem;
+}
+
+.comment__list-parent>.comment__item {
+  margin-bottom: 1rem;
+  background-color: #FAC07C;
+
+}
+
+.comment__list-child {
+  background: #ffdaaf;
 }

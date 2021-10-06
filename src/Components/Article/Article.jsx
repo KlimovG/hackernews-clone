@@ -48,7 +48,7 @@ const Article = (props) => {
       </div>
       <div className="row article__row-2">
         <span className="article__info">{props.points} points by {props.author} {createTime}</span>
-        <button onClick={() => props.getComments(props.id)} className="article__comments">{props.num_comments} comments</button>
+        <button onClick={() => props.getComments(props.itemID)} className="article__comments">{props.num_comments} comments</button>
       </div>
     </li>
   )

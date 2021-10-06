@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -6,6 +7,8 @@ import Header from './Components/header/header'
 import Spinner from './Components/Spinner/Spinner'
 import { Loader, Dimmer, Pagination, Button } from 'semantic-ui-react'
 import Error from './Components/Error/Error';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
 
 import Article from './Components/Article/Article'
 
@@ -22,6 +25,7 @@ function App() {
   const [isDisabledPagination, setIsDisabledPagination] = useState("disabled")
   const [numOfResults, setNumOfResults] = useState({ value: 20 })
   const [totalOfPagination, setTotalOfPagination] = useState(Math.ceil(numOfResults.value / articlesPerPage))
+  const [isComments, setIsComments] = useState(false)
 
   useEffect(() => {
     setTotalOfPagination(Math.ceil(numOfResults.value / articlesPerPage))
@@ -53,6 +57,7 @@ function App() {
     if (value === undefined) {
       value = searchValue;
     }
+    setIsComments(false)
     setIsLoading(true);
     setIsError(false)
     setArticles(prev => prev = [])
@@ -140,7 +145,10 @@ function App() {
       .then((data) => {
         setIsLoading(false);
         if (data) {
-          setComments(data);
+          setComments(data.children);
+          setIsComments(true)
+          // console.log(comments)
+          // createComments(comments)
         } else {
           console.log('No comments detected')
         }
@@ -151,6 +159,29 @@ function App() {
         setIsError(true);
         console.log(error);
       });
+  }
+  const TextOfComment = (props) => {
+    const html = props.text;
+
+    return (
+      // <div ></div>
+      ReactHtmlParser(html)
+    )
+  }
+  const Comment = ({ text, children, id }) => {
+    const hasChildren = children && (children.length > 0)
+    return (
+      <li className="comment__item" key={id + 1} >
+        <p>
+          <TextOfComment key={id + 2} text={text} />
+        </p>
+        {hasChildren && children.map((item) => (
+          <ul className="comment__list-child">
+            <Comment key={item.id} {...item} />
+          </ul>
+        ))}
+      </li>
+    )
   }
   return (
     <>
@@ -173,6 +204,7 @@ function App() {
                   <Article
                     isLoading={isLoading}
                     key={content.objectID}
+                    itemID={content.objectID}
                     id={(activePage - 1) * articlesPerPage + i + 1}
                     title={content.title || content.story_title}
                     link={content.url}
@@ -189,9 +221,14 @@ function App() {
 
           </ol>
           {totalOfPagination > 1 && <Pagination className={isDisabledPagination} activePage={activePage} onPageChange={handlePaginationChange} totalPages={totalOfPagination} />}
+          {isComments &&
+            <div id="commentsContainer">
+              <ul className="comment__list-parent">
+                {comments && comments.map(item => <Comment key={item.id}  {...item} />)}
 
+              </ul>
 
-          {/* {isLoading && } */}
+            </div>}
         </div>
       </main>
 
